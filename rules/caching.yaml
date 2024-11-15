@@ -1,0 +1,26 @@
+name: Caching Conventions
+description: Rules for implementing caching in Next.js 15
+pattern: src/**/*.{ts,tsx}
+conventions:
+  - fetch requests are no longer cached by default
+  - GET Route Handlers are not cached by default
+  - Client Router Cache doesn't cache Page components by default
+implementation:
+  examples: |
+    // Force caching for a fetch request
+    const data = await fetch(url, { cache: 'force-cache' })
+
+    // Force static rendering for a route
+    export const dynamic = 'force-static'
+
+    // Layout level caching
+    export const fetchCache = 'default-cache'
+best_practices:
+  - Use 'force-cache' explicitly when caching is needed
+  - Set dynamic='force-static' for static routes
+  - Use fetchCache='default-cache' for Layout/Page level caching
+  - Implement proper staleTime configuration
+  - Use Cache-Control headers appropriately for self-hosting
+  - Leverage React 19's cache() function for server-side data
+  - Implement proper revalidation strategies using revalidatePath/revalidateTag
+  - Use unstable_cache for custom caching behaviors

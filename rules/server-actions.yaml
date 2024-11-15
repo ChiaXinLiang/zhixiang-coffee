@@ -1,0 +1,43 @@
+name: Server Actions
+description: Rules for implementing Next.js Server Actions
+pattern: src/app/**/actions.ts
+conventions:
+  - Mark server actions with 'use server' directive
+  - Use form actions with action={formAction} syntax
+  - Implement proper error handling and validation
+implementation:
+  structure: |
+    // actions.ts
+    'use server'
+    
+    import { z } from 'zod'
+    
+    const schema = z.object({
+      title: z.string().min(1),
+      content: z.string()
+    })
+    
+    export async function createPost(formData: FormData) {
+      try {
+        const data = schema.parse({
+          title: formData.get('title'),
+          content: formData.get('content')
+        })
+        
+        // Implementation
+        revalidatePath('/')
+        return { success: true }
+      } catch (error) {
+        return { error: 'Invalid input' }
+      }
+    }
+security:
+  - Implement CSRF protection
+  - Validate user authentication
+  - Sanitize inputs
+best_practices:
+  - Group related actions in a single file
+  - Use meaningful function names
+  - Include proper TypeScript types
+  - Implement proper error boundaries
+  - Use revalidatePath/revalidateTag for cache management

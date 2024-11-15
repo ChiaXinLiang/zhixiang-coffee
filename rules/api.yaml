@@ -1,0 +1,34 @@
+name: API Routes
+description: Structure for Next.js API routes
+pattern: src/app/api/**/route.ts
+conventions:
+  - Use HTTP method exports (GET, POST, etc.)
+  - Include proper error handling
+  - Follow RESTful conventions
+  - Use zod for request validation
+  - Return proper Response objects
+implementation:
+  structure: |
+    // route.ts
+    import { z } from 'zod'
+
+    const schema = z.object({
+      name: z.string(),
+      email: z.string().email()
+    })
+
+    export async function POST(request: Request) {
+      try {
+        const data = schema.parse(await request.json())
+        return Response.json({ success: true })
+      } catch (error) {
+        return Response.json({ error: 'Invalid request' }, { status: 400 })
+      }
+    }
+best_practices:
+  - GET Route Handlers are no longer cached by default
+  - Use 'force-static' config for explicit caching
+  - Support for instrumentation.js API for server lifecycle observability
+  - Implement streaming responses when needed
+  - Support for Edge and Node.js runtimes
+  - Implement onRequestError hook for error handling

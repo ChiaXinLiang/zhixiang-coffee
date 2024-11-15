@@ -1,0 +1,33 @@
+name: Forms Enhancement
+description: Guidelines for using the new Form component
+pattern: src/app/**/*.tsx
+conventions:
+  - Use next/form for client-side navigation
+  - Implement prefetching for form targets
+  - Handle progressive enhancement
+implementation:
+  example: |
+    'use client'
+    
+    import { useFormState, useFormStatus } from 'react-dom'
+    import { createPost } from '@/app/actions'
+    
+    export default function MyForm() {
+      const [state, formAction] = useFormState(createPost, null)
+      const { pending } = useFormStatus()
+      
+      return (
+        <form action={formAction}>
+          <input type="text" name="title" />
+          <button type="submit" disabled={pending}>
+            {pending ? 'Submitting...' : 'Submit'}
+          </button>
+          {state?.error && <p>{state.error}</p>}
+        </form>
+      )
+    }
+best_practices:
+  - Preserve shared layouts and client-side state
+  - Support full-page navigation fallback
+  - Implement proper validation
+  - Handle loading and error states

@@ -1,0 +1,16 @@
+version: 1.0
+rules:
+  - !include environment.yaml
+  - !include app-router.yaml
+  - !include components.yaml
+  - !include api.yaml
+  - !include styling.yaml
+  - !include types.yaml
+  - !include state.yaml
+  - !include utils.yaml
+  - !include server-actions.yaml
+  - !include database.yaml
+  - !include auth.yaml
+  - !include middleware.yaml
+  - !include caching.yaml
+  - !include forms.yaml

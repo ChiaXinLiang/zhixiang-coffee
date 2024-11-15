@@ -1,0 +1,33 @@
+name: Component Organization
+description: Rules for React and shadcn components
+pattern: src/components/**/*.tsx
+conventions:
+  - Place reusable components in components/common/
+  - shadcn components should be in components/ui/
+  - Custom components should be in components/[feature]/
+  - Use PascalCase for component names
+  - Each component should be in its own file
+  - Include type definitions using TypeScript interfaces
+implementation:
+  structure: |
+    src/
+      components/
+        common/          # Shared components
+          Button.tsx
+          Card.tsx
+        ui/             # shadcn components
+          button.tsx
+          card.tsx
+        features/       # Feature-specific components
+          auth/
+            LoginForm.tsx
+          dashboard/
+            Overview.tsx
+best_practices:
+  - Use React.cache() for memoizing server-side data fetching
+  - Leverage use server and use client directives appropriately
+  - Implement proper Suspense boundaries for streaming
+  - Support for document hooks in Client Components
+  - Utilize React 19's improved error boundary handling
+  - Support for automatic batching in Server Components
+  - Implement proper asset loading strategies

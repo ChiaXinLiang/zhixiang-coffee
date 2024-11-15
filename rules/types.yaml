@@ -1,0 +1,27 @@
+name: Type Definitions
+description: TypeScript type organization
+pattern: src/types/**/*.ts
+conventions:
+  - Define shared interfaces and types in types/ directory
+  - Use descriptive naming for type definitions
+  - Export types from a central index.ts file
+implementation:
+  structure: |
+    // types/index.ts
+    export * from './user'
+    export * from './auth'
+    export * from './api'
+
+    // types/user.ts
+    export interface User {
+      id: string
+      name: string
+      email: string
+      role: UserRole
+    }
+best_practices:
+  - Follow TypeScript best practices
+  - Include proper JSDoc comments
+  - Support for next.config.ts TypeScript configuration
+  - Use custom TypeScript Plugin for better type checking
+  - Implement efficient compilation strategies

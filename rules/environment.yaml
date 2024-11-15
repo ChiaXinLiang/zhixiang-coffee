@@ -1,0 +1,46 @@
+name: Environment Configuration
+description: Environment variable handling through src/env/server.ts
+pattern: src/env/server.ts
+conventions:
+  - Use zod for environment variable validation
+  - Create type-safe environment configuration
+  - Throw errors for missing required variables
+  - Provide helpful error messages
+  - Keep sensitive data in .env.local
+implementation:
+  structure: |
+    # .env.local
+    DATABASE_URL="postgresql://..."
+    NEXTAUTH_SECRET="your-secret-here"
+    NEXT_PUBLIC_API_URL="https://api.example.com"
+
+    # src/env/server.ts
+    import { z } from 'zod'
+
+    const serverSchema = z.object({
+      DATABASE_URL: z.string().url(),
+      NEXTAUTH_SECRET: z.string().min(1),
+      NODE_ENV: z.enum(['development', 'production', 'test']),
+    })
+
+    declare global {
+      namespace NodeJS {
+        interface ProcessEnv extends z.infer<typeof serverSchema> {}
+      }
+    }
+
+    export const env = serverSchema.parse(process.env)
+validation:
+  - Use serverSchema.parse() to validate on startup
+  - Implement custom error messages for validation
+  - Add runtime type checking
+security:
+  - Never commit .env files to version control
+  - Use strong secrets and encryption keys
+  - Rotate sensitive credentials regularly
+best_practices:
+  - Import env from src/env/server.ts in server-side code
+  - Keep client-side env separate in src/env/client.ts
+  - Document all variables in .env.example
+  - Group related variables together
+  - Include comments for complex configurations

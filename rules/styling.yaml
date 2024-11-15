@@ -1,0 +1,27 @@
+name: Styling Conventions
+description: Rules for styling implementation
+pattern: "src/**/*.{css,scss,tailwind.config.js}"
+conventions:
+  - Use Tailwind CSS classes as primary styling method
+  - Follow shadcn's styling variables in globals.css
+  - Maintain consistent color scheme in tailwind.config.js
+  - Use CSS variables for theme customization
+implementation:
+  structure: |
+    // globals.css
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer base {
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        /* other variables */
+      }
+    }
+best_practices:
+  - Keep component-specific styles in component files
+  - Avoid merging global CSS files with CSS module files
+  - Support for CSS Modules and CSS-in-JS
+  - Implement responsive design patterns

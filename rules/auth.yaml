@@ -1,0 +1,36 @@
+name: Authentication and Authorization
+description: Rules for implementing authentication
+pattern: src/lib/auth/**/*.ts
+conventions:
+  - Use NextAuth.js for authentication
+  - Implement proper session management
+  - Secure API routes with authentication middleware
+implementation:
+  structure: |
+    // auth/config.ts
+    import NextAuth from 'next-auth'
+    import { PrismaAdapter } from '@auth/prisma-adapter'
+    import { prisma } from '@/lib/db/client'
+
+    export const { auth, signIn, signOut } = NextAuth({
+      adapter: PrismaAdapter(prisma),
+      session: { strategy: 'jwt' },
+      pages: {
+        signIn: '/auth/login',
+      },
+      callbacks: {
+        authorized({ auth, request: { nextUrl } }) {
+          return !!auth?.user
+        }
+      }
+      // Additional configuration
+    })
+security:
+  - Use proper password hashing (bcrypt/argon2)
+  - Implement OAuth providers securely
+  - Handle JWT tokens properly
+  - Use secure session cookies
+best_practices:
+  - Implement role-based access control
+  - Implement proper logout mechanisms
+  - Handle authentication errors gracefully

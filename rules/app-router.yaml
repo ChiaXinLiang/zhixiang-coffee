@@ -1,0 +1,16 @@
+name: Next.js App Router Structure
+description: Defines the structure for Next.js 15 app router pages
+pattern: src/app/**/{page,layout,loading,error}.tsx
+conventions:
+  - Files must use default exports
+  - Use React Server Components by default
+  - Include 'use client' directive only when client-side features are needed
+  - Follow naming pattern: page.tsx, layout.tsx, loading.tsx, error.tsx
+  - Request-specific APIs (headers, cookies, params, searchParams) must be async
+  - Use React 19 RC for App Router components
+  - Static Indicator shows static routes during development
+  - Support for next.config.ts TypeScript configuration
+  - Enhanced Forms with next/form for client-side navigation
+  - Support for streaming on Edge and Node.js runtimes
+  - Implement request memoization for data fetching
+  - Use async/await in Server Components for data fetching

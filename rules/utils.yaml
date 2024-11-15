@@ -1,0 +1,29 @@
+name: Utils and Helpers
+description: Organization of utility functions
+pattern: src/lib/utils/**/*.ts
+conventions:
+  - Keep utility functions pure and testable
+  - Group related utilities in separate files
+  - Export from a central index.ts
+implementation:
+  structure: |
+    // utils/index.ts
+    export * from './string'
+    export * from './date'
+    export * from './validation'
+
+    // utils/string.ts
+    export function formatString(str: string): string {
+      return str.trim().toLowerCase()
+    }
+
+    // utils/date.ts
+    export function formatDate(date: Date): string {
+      return new Intl.DateTimeFormat().format(date)
+    }
+best_practices:
+  - Include proper error handling
+  - Add TypeScript documentation
+  - Use unstable_rethrow for internal Next.js errors in App Router
+  - Support for unstable_after API for post-response execution
+  - Implement Core Web Vitals optimization utilities
